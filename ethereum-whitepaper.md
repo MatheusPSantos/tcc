@@ -58,4 +58,49 @@ With Bitcoin we are trying to build a decentralized currency system, so we will 
 	- the hash propagate upward: if a malicious user attempts to swap in a fake transaction into the bottom of a Merkle Tree, this change will cause a change in the node above.
 
 ### Alternative Blockchain applications
+- namecoin -> descentralized name registration database.
+- colored coins -> to serve as a protocol to allow people to create their own digital currencies.
+- metacoins -> idea is to have a protocol that lives on top of Bitcoin, using Bitcoin transactions to store metacoin transactions but having a different state transition fuction.
 
+### Scripting
+- the Bictoin protocol actually does facilities a weak version of a concept of "smar contracts".
+- UTXO (unspent transactions outputs) in Bitcoin can be owned not just by a plublic key, but also by a more complicated script expressed in a simple stack-based programming language.
+- Scripting language implemented in Bitcoin has important limitations:
+	- LACK OF TURING-COMPLETENESS: the main category that is missing is loops.
+	- VALUE-BLINDNESS
+	- LACK OF STATE: UTXO can only be used to build simple, one-off contracts and not more complex "stateful" contracts such as descentralized organizations, ans makes meta-protocols difficult to implement.
+	- BLOCKCHAIN-BLINDNESS: UTXO are blind to blockchain data such as the nonce and previous hash.
+
+- Three approaches to building advanced applications on top of cryptocurrency:
+	- build a new blockchain, using scripting on top of Bitcoin, and building a meta-protocol on top of Bitcoin.
+	- new blockchain -> unlimited freedom x cost of development time and bootstrapping, and meta-protocols suffer from faults in scalability.
+- Ethereum -> intends to build a generalized framework that can provide the advantages of all three paradigms at the same time.
+
+## Ethereum
+
+**Intent** -> to merge together and improve upon the concepts of **scripting**, **altcoins** and o**n-chain meta-protocols**, and allow developers to create arbitrary consensus-based applications that have the scalability, standardization, faeture-completeness, ease of development and interoperability offered by these different paradigms all at the same time.
+
+**Does this by building** a blockchain with a built-in Turing-complete programming language, allowing anyone to write smart contracts and decentralized applications.
+
+**Smar contracts** -> cryptographic "boxes" that contan value and only unlock it if certain conditions are met, can also be built on top of our ethereum, with more power than that offered by Bitcoin scripting because of the added powers of Turing-completeness, value-awareness, blockchain-awareness and state.
+
+### Ethereum Accounts
+- State is made up of objects called "accounts"
+- each account have 20-bytes address and state transitions being direct transfers of value and information between accounts.
+- contains **four fields**:
+	- **nonce** -> counter to sure each transaction can only be processed once
+	- **ether balance** -> account's current balance
+	- **contract code** -> if present
+	- **storage** -> empty by default
+
+- **Ether** -> is internal fuel of Ethereum and is used to pay transaction fees.
+- externally owned accounts -> controlled by private keys.
+	- has no code
+	- and one can send messaages from an externally owned account by creating and signing a transaction.
+- contract accounts -> controlled by their contract code.
+	- every time the contract account receives a message its code activates;
+	- it allow to read and write to internal storage and send other messages or create contracts in turn.
+
+## Messages and Transactions
+
+- 
