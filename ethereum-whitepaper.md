@@ -78,11 +78,11 @@ With Bitcoin we are trying to build a decentralized currency system, so we will 
 
 ## Ethereum
 
-**Intent** -> to merge together and improve upon the concepts of **scripting**, **altcoins** and o**n-chain meta-protocols**, and allow developers to create arbitrary consensus-based applications that have the scalability, standardization, faeture-completeness, ease of development and interoperability offered by these different paradigms all at the same time.
+**Intent** -> to merge together and improve upon the concepts of **scripting**, **altcoins** and **one-chain meta-protocols**, and allow developers to create arbitrary consensus-based applications that have the scalability, standardization, faeture-completeness, ease of development and interoperability offered by these different paradigms all at the same time.
 
 **Does this by building** a blockchain with a built-in Turing-complete programming language, allowing anyone to write smart contracts and decentralized applications.
 
-**Smar contracts** -> cryptographic "boxes" that contan value and only unlock it if certain conditions are met, can also be built on top of our ethereum, with more power than that offered by Bitcoin scripting because of the added powers of Turing-completeness, value-awareness, blockchain-awareness and state.
+**Smart contracts** -> cryptographic "boxes" that contan value and only unlock it if certain conditions are met, can also be built on top of our ethereum, with more power than that offered by Bitcoin scripting because of the added powers of Turing-completeness, value-awareness, blockchain-awareness and state.
 
 ### Ethereum Accounts
 - State is made up of objects called "accounts"
@@ -103,4 +103,49 @@ With Bitcoin we are trying to build a decentralized currency system, so we will 
 
 ## Messages and Transactions
 
-- 
+- Messages are similar to "Transactions" in Bitcoin
+	- differences:
+		1. an Ethereum message can be created either by an external entity or a contract, whereas a Bitcoin transaction  can only be cretad by externally.
+		2. there is an explicit option for Ethereum messages to contain data.
+		3. If the recipient of an Ethereum message is a contract account, jas the option to return a response. This means that Ethereum messages also encompass the concept of functions.
+- "transaction" -> refer to the signed data package that stores a message to be sent from an externally owned account.
+	1. contains:
+		- the recipient
+		- signature indentifying the sender
+		- the amount of ether 
+		- the data to send.
+		- STARTGAS -> is the limit
+		- GASPRICE -> the fee to pay to the miner per computational step
+- the address of the contract is calculated based on the hash of the account nonce and transaction data.
+- **first class citizen** property of Ethereum -> the idea that contracts have equivalent powers to external accounts, including the ability to send message and create other contracts.
+
+### Ethereum State Transition Function
+APPLY(S,TX) -> S':
+
+1. Check if the transaction is well-formed, the signature is valid, and the nonce matches the nonce in the sender's account. If not return an error.
+2. Calculate the transaction fee as STARTGAS * GASPRICE, and determine the sender address from the signature. Subtract the fee from the sender account balance and increment the sender's nonce. If there is not enough balance to spend, return an error.
+3. Initilize GAS = STARTGAS, and take off certain quantity of gas per byte to pay for the bytes in the transaction.
+4. Transfer the transaction value from the sender's account to the receiving account. If the receiving account does not yet exist, create it. If the receiving account is a contract, run the contract's code either to completion or until the execution runs out of gas.
+5. If the value transfer failde because the sender did not have anough money, or the execution code run out of gas, revert all state changes except the payment of the fees, and add the fees to miner's account.
+6. Otherwise, refund the fees for all remaining gas to the sender, and send the fees paid for gas consumer to the miner.
+
+
+### Code Execution
+
+The code in Ethereum contracts is written in low-level, stack-based bytecode language, referred to as "Ethereum Virtual Machine Code" or "EVM code".
+
+The conde consists in a serie of bytes where each byte represents an operation. The execution is an infinite loop.
+
+The operations have access to three types of space in which to store data:
+1. the **stack**
+2. **memory**, an infinitely expandable byte array
+3. The contract's long-term **storage**, a key/value store.
+
+Stack and memory reset after the computation ends, storage persists for the long term.
+
+Whiel the Ethereum Virtual Machine is running, its full computational state can be definde by the tuple **(block_state, transaction, message, code, memory, stack, pc, gas)**.
+1. the block_state is the global state containing all accounts and includes balances and storage.
+
+Every round of execution, the current instruction is found by taking the pc-th byte of code, and each instruction has its own definition in terms of how it affects the tuple.
+
+## Blockchain and Mining
