@@ -149,3 +149,29 @@ Whiel the Ethereum Virtual Machine is running, its full computational state can 
 Every round of execution, the current instruction is found by taking the pc-th byte of code, and each instruction has its own definition in terms of how it affects the tuple.
 
 ## Blockchain and Mining
+- The main difference between Ethereum and Bitcoin with regard to the blockchain architecture is that, unlike Bitcoin, Ethereum block contain a copy of both the transaction list and the most recent state.
+- Block validation algorithm:
+	1. Check if the previous block referenced exists and is valid
+	2. Check that the timestamp of the block is greater than that of the referenced previous block and less than 15 minutes into the future;
+	3. Check that the block number, difficulty, transaction root, uncle root and gas limit are valid;
+	4. Check that the proof of work on the block is valid;
+	5. Let S[0] be the STATE_ROOT of the previous block;
+	6. Let TX be the block's transaction list, with n transactions. For all in 0..n-1, set S[i+1] = APPLY(S[i],TX[i]). If any applications returns an error, or if the total gas consumed in the block up until this point exceeds the GASLIMIT, return an error;
+	7. Let S_FINAL be S[n], but adding the block reward paid to the miner;
+	8. Check if S_FINAL is the same as the STATE_ROOT. If it is, the block is valid; otherwise, it is not valid;
+
+- The state is stored in the tree structure;
+- Cause all of the state information is part of the block, there is no need to store the entire blockchain history;
+
+
+### Applications
+1. financial applications
+2. semi-financial applications
+3. Online voting and decentralized governance
+
+### Token Systems
+- All a currency, or token system, fundamentally is a database with one operation: subtract X units from A and give X units to B, with the proviso that X had a least X units before the transaction and the transaction is approved by A. All that it takes to implement a token system is to implement this logic into a contract.
+
+## Indentify and Reputation Systems
+- dencentralized file storage
+- Decentralized Autonomous Organization
