@@ -175,3 +175,46 @@ Every round of execution, the current instruction is found by taking the pc-th b
 ## Indentify and Reputation Systems
 - dencentralized file storage
 - Decentralized Autonomous Organization
+	- organization that certain of members or shareholders which, perphaps with a 67% majority, have the right to spend the entity's funds and modify its code.
+	- members would collectively decide on how the organization should allocate its funds.
+	- The simplest design is simplu a piece of self-modifuing code that changes if two thirds of members agree on a change.
+	- THe contract would then have clauses for each of these. It would maintain a record of all open storage changes, along with a list of who voted for them.
+	- The differnce between DO and DAO is fuzzy, but the general dividing  line is whether the governance is generally out via a political-like process or an "automatic" process.
+
+## Miscellanea and Concerns
+1. Modified GHOST Implementation
+
+	- Greedy Heavist Observed Sutree (GHOST) protocol. The motivation behind GHOST is that blockchain with fast confirmation times currently suffer from reduced security due to a high stale rate.
+	- Blocks take a certain time to propagate through the network.
+	- to solve the centralization bias, we go beyond the protocol and also allow stales to be registered into the main chain to receive a block reward.
+
+## Fees
+- Every transaction published into the blockchain imposes on the network the cost of needing to download and verify it
+- regulatory mechanism involving transacton fees, to prevent abuse
+
+## Computation and Turing-Completeness
+- the Ethereum Virtual Machine is Turing-complete.
+- the EVM code can encode any computation that can be can be conceivably carried out, including infinite loops.
+## Issuance breakdown
+### Mining centralization
+- Bitcoin mining algorithm is vulnerable to two forms of centralization:
+	1. The mining ecosyste has come to be dominated by ASIC's computer chips designed for, and therfore thousands of times more efficient at, the specific task of Bitcoin mining.
+		- the bitcoin mining is no longer a highly decentralized and egalitarian pursuit, requiring million of dollars of capital to effectively participate.
+	2. Most Bitcoin miners do not actually perform block validation locally; instead, they rely on a centralized mining pool to provide the blcok headers.
+		- the miners can switch to other mining pools if a pool or coalition attempts a 51% attack.
+- Ethereum intent is use a mining algorithm based on randomly generating a unique hash function for every 100 nonces, usinf a sufficiently broad range of computation to remove the benefit of specialized hardware.
+- to design algoritm that mining requires access to the entire blockchain, forcing the miners to store the entire blockchain and at least be capable of verifying every transaction. Removing the need for centralization pools.
+
+## Scalability
+- Ethereum suffers from the flaw that every transaction needs to be processed by every node in the network;
+- the Ethereum full nodes need to store just the state instead of the entire blockchain history;
+
+## Puting it all together: Decentralized Applications
+- the contract mechanism allows anyone to build what is essentially a command line app run on a VM that is executed by consensus across the entire network, allowing it to modify a globally accessible state as its "hard drive".
+- Decentralized application -> low-level business-logic components, whether implemented entirely on Ethereum, using combination of Ethereum and other systems, or other system entirely, and high-level graphical user interface components.
+
+# Conclusion
+- The Ethereum protocol was originally conceived as an upgrade version of a cryptocurrency, provinding advanced features such as on-blockchain escrow.
+- the Ethereum protocol would not support any of the applications directly, but the Turing-complete proggraming language means that arbitrary contracts can theoretically be created for any transaction type application.
+- concept of an arbitrary state transition function as implemented by the Ethereum protocol provides for a platform with unique potential, rather than beuing a closed-ended, single-purpose protocol intended for a specific array of applications in data storage, gambling or finance.
+- Ehtereum is Open-ended by design.
