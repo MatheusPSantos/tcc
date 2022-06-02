@@ -1,0 +1,6 @@
+
+- Contar a evolução da denuncia dos crimes ambientais no Brasil
+- Apresentar o processo atual de denuncia de crimes ambientais no Brasil
+	- mostrar uma visão geral da arquitetura
+- Apresentar pontos que podem ser explorados como falha
+- justificar o uso de blockchain a partir desses pontos de falha	
