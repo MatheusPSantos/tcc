@@ -1,0 +1,22 @@
+1. Introdução
+
+2. Aplicação
+
+3. Organização
+3.3 Fases do PDS-IBAMA
+	Subprocesso de Desenvolvimento foi dividido em cinco fases: Requisitos, Design e Arquitetura, Implementção, Testes e Homologação.
+	Subprocesso de Transição possui uma fase, Implantação em Produção.
+
+4. Organização por Temas
+- Gestão de Demandas de TI: Apresentar o fluxo de trabalho que antecede o desenvolvimento de software em si. Verificar alinhamento de demanda de software com as necessidades de negócio do Orgão no Plano Diretor de Tecnologia da Informação.
+
+- Gestão de Projetos: Visar promover uma adequada gestão de projetos.
+
+- Desenvolvimento de Software: Desenvolvimento e manutenção de sistemas baseado nas melhores práticas e metodologias utilizadas.
+
+- Gestão de Infraestrutura: Construir um ambiente que tenha a capacidade necessária para prover serviços e uma estrutura adequada ao desenvolvimento de software.
+
+- GEstão de Treinamento de Incidentes: Visa planejar como os incidentes serão tratados.
+
+
+
