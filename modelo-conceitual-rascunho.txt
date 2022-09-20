@@ -1,0 +1,26 @@
+CASO DE USO 1
+
+1. O Denunciante acessa a página ou tela de login e fornece suas credenciais.
+2. O Denunciante clica no botão de ”Login”ou ”Entrar”para realizar a requisição de autenticação ao sistema.
+3. O Sistema avisa se houver algum erro com as credenciais do Denunciante e o redireciona para a tela de login.
+4. O Sistema avisa que o login foi realizado com sucesso se não houver erros na credencial do Denunciante. Após o aviso, ele o redireciona para a tela principal do sistema.
+5. Uma vez autenticado, o Denunciante pode ver as denúncias que ele já realizou, denúncias de outros usuários e pode criar uma nova denúncia.
+
+	1 PASSO - substantivos
+1. O Denunciante acessa a página ou tela de login e fornece suas credenciais.
+2. O Denunciante clica no botão de ”Login”ou ”Entrar”para realizar a requisição de autenticação ao sistema.
+3. O Sistema avisa se houver algum erro com as credenciais do Denunciante e o redireciona para a tela de login.
+4. O Sistema avisa que o login foi realizado com sucesso se não houver erros na credencial do Denunciante. Após o aviso, ele o redireciona para a tela principal do sistema.
+5. Uma vez autenticado, o Denunciante pode ver as denúncias que ele já realizou, denúncias de outros usuários e pode criar uma nova denúncia.
+
+
+
+
+--------------------------------------------------------------------------------
+
+CASO DE USO 2
+
+
+
+
+--------------------------------------------------------------------------------
