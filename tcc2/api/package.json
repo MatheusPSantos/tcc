@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API que realiza a conexão com a Blockchain e que recebe requests do projeto /application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusPSantos/tcc.git"
+  },
+  "keywords": [
+    "api",
+    "node.js",
+    "dapp",
+    "backend"
+  ],
+  "author": "matheuspsantos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MatheusPSantos/tcc/issues"
+  },
+  "homepage": "https://github.com/MatheusPSantos/tcc#readme"
+}
