@@ -5,7 +5,7 @@ const router = express.Router();
 const { create } = require("./validator");
 
 router.post(
-  "/usuario",
+  "/usuarios",
   createValidator().body(create.body),
   UsuarioController.criarUsuario,
 );

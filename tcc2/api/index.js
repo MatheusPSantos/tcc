@@ -1,16 +1,18 @@
 require("dotenv").config();
 const app = require("express")();
-const { json } = require("express");
 const routes = require("./src/routes");
 const bodyParser = require("body-parser");
-const Web3 = require("web3");
 const cors = require("cors");
-
+require('./database');
 
 app.use(bodyParser.json());
 app.use(cors());
 
 app.use(routes);
+
+console.log( '✔ Starting Application' );
+console.log( `✔ Mode: ${process.env.NODE_ENV}` );
+console.log( `✔ Port: ${process.env.PORT}` );
 
 app.listen(process.env.PORT || 3333, () => {
     console.info(`API running on port http://127.0.0.1:${process.env.PORT || 3333}`);

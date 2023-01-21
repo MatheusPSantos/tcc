@@ -10,7 +10,7 @@ module.exports = {
         method: 'post',
         url: alert_url,
         data: { 
-          text: `*🚨 Grave:* _(${arquivo})_: ${erro.message}`,
+          text: `*🚨 Grave:* _(${arquivo})_: ${erro.stack}`,
           'username': 'tcc2',
           'icon_emoji': ':robot_face:'
         }
