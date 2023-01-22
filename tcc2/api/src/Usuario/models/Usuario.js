@@ -1,8 +1,8 @@
 const { default: mongoose } = require("mongoose");
 
 const UsuarioSchema = new mongoose.Schema({
-  username: String,
-  email: String,
+  username: { type: String, lowercase: true },
+  email: { type: String, lowercase: true },
   password: String,
   nome: String,
   sobrenome: String,
