@@ -13,5 +13,10 @@ module.exports = {
       cpf: Joi.string().required(),
       telefone: Joi.string().required().pattern(new RegExp('(^[0-9]{2})?(\s|-)?(9?[0-9]{4})-?([0-9]{4}$)')),
     }),
-  }
+  },
+  excluir: {
+    params: Joi.object({
+      email: Joi.string().email().min(3).required(),
+    }),
+  },
 };

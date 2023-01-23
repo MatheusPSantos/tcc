@@ -48,6 +48,21 @@ async function criarUsuario(req, res) {
   }
 }
 
+async function excluir(req, res) {
+  try {
+    const { email } = req.params;
+
+    const usuarioExcluido = await UsuarioService.excluirUsuario({ email });
+
+    res.status(HttpStatusCode.Accepted).json(usuarioExcluido);
+
+  } catch (error) {
+    NotificarErroAoSlack('Usuario/controllers/usuario.js', error);
+    res.status(HttpStatusCode.InternalServerError).json(error.message);
+  }
+}
+
 module.exports = {
   criarUsuario,
+  excluir,
 };
