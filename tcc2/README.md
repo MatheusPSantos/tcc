@@ -19,6 +19,8 @@ Por padrão, por estar utilizando o HardHat, estamos utilizando a Hardhat Networ
 - Rodar o seguinte comando:
   - `npx hardhat node`
   - Esse comando irá iniciar uma rede Hardhat e expô-la como JSON-RPC e também um servidor websocket.
+  - Depois é necessário fazer o deploy do contrato, para localhost o comando é `npx hardhat run scripts/NOME.js --network localhost`.
+  - Irá aparecer um endereco hexadecimal de onde o contrato foi deployado.
 
 ## To dos:
 - configurar o hardhat.config.js para utilizar a rede de testes;
