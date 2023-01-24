@@ -92,4 +92,5 @@ async function removerEmailUserSalvo(email, username) {
 module.exports = {
   criarUsuario,
   excluirUsuario,
+  emailEUsernameJaCadastrado
 }

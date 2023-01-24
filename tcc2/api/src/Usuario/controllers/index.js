@@ -44,7 +44,7 @@ async function criarUsuario(req, res) {
     res.status(HttpStatusCode.Created).json(novoUsuario.toObject());
   } catch (error) {
     NotificarErroAoSlack('Usuario/controllers/usuario.js', error);
-    res.status(HttpStatusCode.InternalServerError).json(error.message);
+    res.status(HttpStatusCode.InternalServerError).json({ error: error.message });
   }
 }
 
@@ -58,7 +58,7 @@ async function excluir(req, res) {
 
   } catch (error) {
     NotificarErroAoSlack('Usuario/controllers/usuario.js', error);
-    res.status(HttpStatusCode.InternalServerError).json(error.message);
+    res.status(HttpStatusCode.InternalServerError).json({ error: error.message });
   }
 }
 
