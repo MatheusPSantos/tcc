@@ -10,12 +10,12 @@ app.use(cors());
 
 app.use(routes);
 
-console.log( '✔ Starting Application' );
-console.log( `✔ Mode: ${process.env.NODE_ENV}` );
-console.log( `✔ Port: ${process.env.PORT}` );
+console.info( '✔ Starting Application' );
+console.info( `✔ Mode: ${process.env.NODE_ENV}` );
+console.info( `✔ Port: ${process.env.PORT}` );
 
 app.listen(process.env.PORT || 3333, () => {
     console.info(`API running on port http://127.0.0.1:${process.env.PORT || 3333}`);
 });
 
-console.log(process.env.PORT);  
+console.info(process.env.PORT);  

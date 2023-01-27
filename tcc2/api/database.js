@@ -12,7 +12,7 @@ class Conexao {
 
     this.connect(url, options)
       .then(() => {
-        console.log('✔ Database Connected');
+        console.info('✔ Database Connected');
       })
       .catch(error => {
         console.error('✘ MONGODB ERROR: ', error.message);

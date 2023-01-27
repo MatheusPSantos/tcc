@@ -16,7 +16,7 @@ async function adicionarEndereco(req, res) {
       cep,
       coordenadas
     } = req.body;
-    console.log(email)
+
     const usuario = await Usuario.findOne({ email }).lean();
 
     if (!usuario) res.status(404).json({
