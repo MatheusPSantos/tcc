@@ -1,18 +1,13 @@
 require('dotenv').config();
 
 const { HttpStatusCode } = require('axios');
-const Web3 = require('web3');
 const { ABI } = require('../../../contracts');
 const { NotificarErroAoSlack } = require('../../exceptions');
+const { Web3HttpProvider, getAssinante } = require('../../providers/blockchain');
 const { excluirUsuario, consultarUsuario } = require('../../Usuario/services');
 const network = process.env.EHTHEREUM_NETWORK;
-const web3 = new Web3(
-  new Web3.providers.HttpProvider(
-    process.env.JSON_RPC_SERVER,
-  )
-);
-
-const assinante = web3.eth.accounts.privateKeyToAccount(process.env.CHAVE_PRIVADA_ASSINANTE);
+const web3 = Web3HttpProvider();
+const assinante = getAssinante(web3);
 
 async function salvarUsuarioNaBlockchain(req, res) {
   try {

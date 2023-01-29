@@ -7,7 +7,8 @@
     "dev": "NODE_ENV=dev npm install && nodemon index.js",
     "start": "node index.js",
     "test-server": "NODE_ENV=test npm install && nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "node node_modules/insomnia-documenter/bin/generate.js --config ./documentation/insomnia.json --output ./documentation/dist/"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "web3": "^1.8.1"
   },
   "devDependencies": {
+    "insomnia-documenter": "^0.5.4",
     "nodemon": "^2.0.20"
   }
 }

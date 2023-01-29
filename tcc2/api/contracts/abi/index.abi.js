@@ -9,6 +9,7 @@ async function getContratoABI(nomeContrato) {
   }).catch(function (error) {
     console.error(error);
     NotificarErroAoSlack('/api/contracts/abi/index.abi.js/getusuarioAbi', error);
+    throw new Error(error);
   });
 }
 

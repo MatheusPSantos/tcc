@@ -1,7 +1,5 @@
 const express = require('express');
 const fs = require('fs');
-const path = require('path');
-
 const app = express();
 
 /**
@@ -23,6 +21,8 @@ app.use((req, res, next) => {
 app.get('/abi/:contratoNome', (req, res) => {
   try {
     const { contratoNome } = req.params;
+    console.info(`Consultando contrato ${contratoNome} ...`);
+
     if (!contratoNome) res.status(404).send({ error: 'Informe um nome de contrato para pesquisarmos o ABI.' });
 
     fs.readFile(
@@ -38,7 +38,7 @@ app.get('/abi/:contratoNome', (req, res) => {
         }
       });
   } catch (error) {
-    throw new Error(error);    
+    throw new Error(error);
   }
 });
 
