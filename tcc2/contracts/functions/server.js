@@ -18,6 +18,13 @@ app.use((req, res, next) => {
   }
 });
 
+/**
+ * Essa rota permite que o backend que não tem a implementação do contrato
+ * possa pegar o ABI resultante do deploy do contrato.
+ * @param {string} rota
+ * @param {Function<express>} (req, res)
+ * @returns {Object} Retorna o json contendo o ABI do contrato
+ */
 app.get('/abi/:contratoNome', (req, res) => {
   try {
     const { contratoNome } = req.params;

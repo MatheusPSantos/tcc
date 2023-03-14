@@ -11,3 +11,6 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+
+## /functions
+Essa pasta serve para guardar algumas funcionalidades que podem ser úteis tanto para os contratos em si quanto para quem irá consumí-los.
