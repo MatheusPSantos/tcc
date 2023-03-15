@@ -86,6 +86,24 @@ contract Usuario {
     }
 
     /**
+     * Função que verifica se o usuario existe.
+     */
+    function verificarUsuarioExiste(string memory _email)
+        public
+        view
+        returns (bool)
+    {
+        if (
+            keccak256(abi.encodePacked(listaDeUsuarios[_email].email)) ==
+            keccak256(abi.encodePacked(_email))
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Função que realiza login
      * @param _password password do usuário
      * @param _email email do usuario
