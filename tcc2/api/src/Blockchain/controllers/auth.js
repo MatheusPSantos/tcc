@@ -11,12 +11,15 @@ const assinante = getAssinante(web3);
 async function login(req, res) {
   try {
     const { email, password } = req.body;
-    console.clear();
+    // realizando a conexão com o contrato através do ABI
     const chamarABI = await ABI.getContratoABI('Usuario');
     const usuarioContratoABI = chamarABI.abi;
-    const contratoInteligente = new web3.eth.Contract(
-      usuarioContratoABI, process.env.USUARIO_CONTRACT_ADDRESS
-    );
+    const contratoInteligente = new web3.eth.Contract(usuarioContratoABI, process.env.USUARIO_CONTRACT_ADDRESS);
+    // regras de negócio para a funcionalidade de login
+    const usuarioExiste = await contratoInteligente.methods.verificarUsuarioExiste(email).call();
+    if(!usuarioExiste) {
+      return res.status(HttpStatusCode.NotFound).send('Usuário não existe.');
+    }
     const estaLogado = await contratoInteligente.methods
       .verificarSeUsuarioEstaLogado(email)
       .call();
@@ -24,9 +27,7 @@ async function login(req, res) {
     /** @todo verificar como trabalhar com os tokens */
     if (estaLogado) { }// fazer chamada retornar um token
     // function fazerLogin(string memory _password, string memory _email)
-    const transacao = contratoInteligente.methods.fazerLogin(
-      password, email
-    );
+    const transacao = await contratoInteligente.methods.fazerLogin(password, email);
 
     const receipt = await transacao.send({ from: assinante.address, gas: await transacao.estimateGas() })
       .once('transactionHash', txHash => {
