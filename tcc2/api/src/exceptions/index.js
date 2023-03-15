@@ -3,6 +3,9 @@ const axios = require('axios');
 
 module.exports = {
   NotificarErroAoSlack: async (arquivo, erro) => {
+    if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+      return console.log(arquivo, erro);
+    }
     new Error(erro);
     try {
       const alert_url = `https://hooks.slack.com/services/${process.env.SLACK_TOKEN}`;
