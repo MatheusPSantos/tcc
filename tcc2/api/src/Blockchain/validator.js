@@ -5,6 +5,13 @@ module.exports = {
     body: Joi.object({
       email: Joi.string().email().required(),
       username: Joi.string().min(3).required(),
+      nome: Joi.string(),
+      sobrenome: Joi.string(),
+      rg: Joi.string(),
+      cpf: Joi.string(),
+      telefone: Joi.string(),
+      password: Joi.string().min(3).required(),
+      repeat_password: Joi.string().min(3).required(),
     })
   },
   login: {

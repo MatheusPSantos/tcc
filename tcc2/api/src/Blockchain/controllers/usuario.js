@@ -20,7 +20,7 @@ async function salvarUsuarioNaBlockchain(req, res) {
       if (usuarioContractAbi && Array.isArray(usuarioContractAbi)) {
         web3.eth.accounts.wallet.add(assinante);
         const contratoInteligente = new web3.eth.Contract(usuarioContractAbi, process.env.USUARIO_CONTRACT_ADDRESS);
-        const transaction = contratoInteligente.methods.registrarUsuario(
+        const transaction = await contratoInteligente.methods.registrarUsuario(
           usuario.username,
           usuario.email,
           usuario.nome,
@@ -31,8 +31,17 @@ async function salvarUsuarioNaBlockchain(req, res) {
           usuario.endereco,
           usuario.password
         );
+        if (!transaction) {
+          return res.status(HttpStatusCode.FailedDependency)
+            .send('Falha ao criar a transação.');
+        }
+        const estimatedGas = await transaction.estimateGas();
+        if (!estimatedGas) {
+          return res.status(HttpStatusCode.FailedDependency)
+            .send('Falha ao tentar estimar o GAS.');
+        }
         const receipt = await transaction
-          .send({ from: assinante.address, gas: await transaction.estimateGas() })
+          .send({ from: assinante.address, gas: estimatedGas })
           .once('transactionHash', txHash => {
             console.info('Mineirando transação ...');
             console.info(`https://${network}.etherscan.io/tx/${txHash}`);
