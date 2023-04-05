@@ -9,6 +9,13 @@ const network = process.env.EHTHEREUM_NETWORK;
 const web3 = Web3HttpProvider();
 const assinante = getAssinante(web3);
 
+/**
+ * Função que salva um usuário na Blockchain a parti dos dados
+ * que já estão prés-salvos no Banco de dados intermediário.
+ * @param {express.request} req 
+ * @param {express.response} res 
+ * @returns {Promise<Object>}
+ */
 async function salvarUsuarioNaBlockchain(req, res) {
   try {
     const { username, email } = req.body;
@@ -27,8 +34,8 @@ async function salvarUsuarioNaBlockchain(req, res) {
           usuario.sobrenome || '',
           usuario.rg || '',
           usuario.cpf,
-          usuario.telefone,
-          usuario.endereco,
+          usuario.telefone || '',
+          usuario.endereco || '{}',
           usuario.password
         );
         if (!transaction) {
@@ -57,7 +64,7 @@ async function salvarUsuarioNaBlockchain(req, res) {
         res.status(HttpStatusCode.BadRequest).json({ error: 'Smart contract não possui ABI associado.' });
       }
     } else {
-      res.status(HttpStatusCode.NotFound).json({ error: 'Usuário não existe.' });
+      res.status(HttpStatusCode.NotFound).json({ error: 'Usuário não está pré-cadastrado.' });
     }
   } catch (error) {
     NotificarErroAoSlack('salvarUsuarioNaBlockchain', error);

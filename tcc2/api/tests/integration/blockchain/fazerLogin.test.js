@@ -1,8 +1,25 @@
+const { faker } = require('@faker-js/faker');
+const { HttpStatusCode } = require('axios');
 const { createClient } = require('../../setup');
 
-let client;
-
+faker.setLocale("pt_BR");
 describe('Fazer login.', () => {
+  let client;
+  let usuarioNoBDTemporario;
+
+  const enderecoMock = {
+    pais: faker.address.country(),
+    estado: faker.address.state(),
+    cidade: faker.address.city(),
+    logradouro: faker.address.street(),
+    referencia: faker.address.buildingNumber(),
+    cep: faker.address.zipCode(),
+    coordenadas: {
+      latitude: faker.address.latitude(),
+      longitude: faker.address.longitude()
+    }
+  };
+
   const dadosUsuarioMock = {
     nome: "Júlio",
     sobrenome: "Pereira",
@@ -12,7 +29,8 @@ describe('Fazer login.', () => {
     cpf: "123.456.789-10",
     telefone: "(57) 6756-6692",
     password: "12345",
-    repeat_password: "12345"
+    repeat_password: "12345",
+    endereco: JSON.stringify(enderecoMock)
   };
 
   const dadosLogin = {
@@ -20,11 +38,16 @@ describe('Fazer login.', () => {
     password: dadosUsuarioMock.password
   };
 
-
   beforeAll(async () => {
     client = await createClient();
+    let dados = dadosUsuarioMock;
+    delete dados.endereco;
+    usuarioNoBDTemporario = await cadastrarUsuarioNoBancoTemporario(dados);
   });
 
+  const cadastrarUsuarioNoBancoTemporario = async (dados) => {
+    return await client.post('/usuarios').send(dados);
+  };
   const cadastrarUsuarioBlockchain = async (dados) => {
     return await client.post('/blockchain/salvar/usuario').send(dados);
   };
@@ -35,6 +58,19 @@ describe('Fazer login.', () => {
 
     expect(response).toHaveProperty('status', 404);
     expect(response).toHaveProperty('text', 'Usuário não existe.');
+  });
+
+  it('Deve retornar mensagem de erro para login não válido', async () => {
+    const res = await client.post('/blockchain/login/usuario/')
+      .send({ email: 'loginInvalido@email.com', password: '1111' });
+
+    expect(res.status).toBe(HttpStatusCode.NotFound);
+  });
+
+  it('Deve retornar um erro de email inválido se informar formato de email errado', async () => {
+    const res = await client.post('/blockchain/login/usuario')
+      .send({ email: 'naovalido', password: '12434' });
+    expect(res.status).toBe(HttpStatusCode.BadRequest);
   });
 
   it('Deve retornar um token se usuário existe na Blockchain.', async () => {

@@ -12,6 +12,7 @@ module.exports = {
       telefone: Joi.string(),
       password: Joi.string().min(3).required(),
       repeat_password: Joi.string().min(3).required(),
+      endereco: Joi.string(),
     })
   },
   login: {
