@@ -58,7 +58,7 @@ async function salvarUsuarioNaBlockchain(req, res) {
         res.status(HttpStatusCode.Created).json({
           message: 'Transação bem-sucedida.',
           blockNumber: receipt.blockNumber,
-          usuarioExcluidoDoMongoDB: { ...usuarioExcluido },
+          dadosUsuarioTemporario: { ...usuarioExcluido },
         });
       } else {
         res.status(HttpStatusCode.BadRequest).json({ error: 'Smart contract não possui ABI associado.' });

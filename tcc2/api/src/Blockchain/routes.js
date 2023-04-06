@@ -19,6 +19,10 @@ router.post(
   //BlockchainController.salvarUsuarioNaBlockchain
 );
 
+/**
+ * Essa rota é responsável por salvar os dados de um usuário na blockchain através das 
+ * chamadas do contrato.
+ */
 router.post(
   "/blockchain/salvar/usuario",
   createValidator().body(create.body),

@@ -11,7 +11,8 @@ async function criarUsuario({ username, email, password, nome, sobrenome, rg, cp
     throw new Error("Este email ou username já está sendo utilizado.");
   }
 
-  const senhaCriptografada = await criptografarSenha(password); // criptografar a senha
+  // criptografar a senha
+  const senhaCriptografada = await criptografarSenha(password);
   const novoUsuario = new Usuario({
     username,
     email,

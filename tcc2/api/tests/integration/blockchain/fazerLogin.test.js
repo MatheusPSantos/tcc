@@ -1,6 +1,7 @@
 const { faker } = require('@faker-js/faker');
 const { HttpStatusCode } = require('axios');
 const { createClient } = require('../../setup');
+const { cadastrarUsuarioBlockchain, cadastrarUsuarioNoBancoTemporario } = require('../globals');
 
 faker.setLocale("pt_BR");
 describe('Fazer login.', () => {
@@ -45,13 +46,6 @@ describe('Fazer login.', () => {
     usuarioNoBDTemporario = await cadastrarUsuarioNoBancoTemporario(dados);
   });
 
-  const cadastrarUsuarioNoBancoTemporario = async (dados) => {
-    return await client.post('/usuarios').send(dados);
-  };
-  const cadastrarUsuarioBlockchain = async (dados) => {
-    return await client.post('/blockchain/salvar/usuario').send(dados);
-  };
-
   it('Deve retornar mensagem se usuário não existe na Blockchain.', async () => {
     const response = await client.post('/blockchain/login/usuario')
       .send(dadosLogin);
@@ -74,7 +68,14 @@ describe('Fazer login.', () => {
   });
 
   it('Deve retornar um token se usuário existe na Blockchain.', async () => {
-    const response = await cadastrarUsuarioBlockchain(dadosUsuarioMock);
-    console.log(`response >> ${JSON.stringify(response)}`);
+    const res = await cadastrarUsuarioBlockchain(dadosUsuarioMock);
+    const { email, password } = res.body.dadosUsuarioTemporario;
+
+    const chamadaDeLogin = await client.post('/blockchain/login/usuario')
+      .send({ email: email, password: password });
+    
+    expect(chamadaDeLogin.status).toBe(200);
+    expect(chamadaDeLogin.body).toHaveProperty('token');
+    expect(chamadaDeLogin.body).toHaveProperty('estaLogado');
   });
 });

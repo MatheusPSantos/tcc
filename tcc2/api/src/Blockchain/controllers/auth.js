@@ -10,7 +10,8 @@ const assinante = getAssinante(web3);
 
 async function login(req, res) {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    email = email.toLowerCase();
     // realizando a conexão com o contrato através do ABI
     const chamarABI = await ABI.getContratoABI('Usuario');
     const usuarioContratoABI = chamarABI.abi;
@@ -25,7 +26,8 @@ async function login(req, res) {
       .call();
 
     /** @todo verificar como trabalhar com os tokens */
-    if (estaLogado) { }// fazer chamada retornar um token
+    if (estaLogado) {
+    }// fazer chamada retornar um token
     // function fazerLogin(string memory _password, string memory _email)
     const transacao = await contratoInteligente.methods.fazerLogin(password, email);
 
